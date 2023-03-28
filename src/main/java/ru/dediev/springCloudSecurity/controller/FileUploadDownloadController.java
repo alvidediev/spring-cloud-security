@@ -27,7 +27,7 @@ public class FileUploadDownloadController {
     private String filePath;
     @PostMapping("/upload")
     public ResponseEntity uploadToLocalFileSystem(@RequestParam("file") MultipartFile file) {
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Path path = Paths.get( filePath + fileName);
         try {
             Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
