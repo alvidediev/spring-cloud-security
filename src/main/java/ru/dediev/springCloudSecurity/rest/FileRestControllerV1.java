@@ -1,5 +1,8 @@
 package ru.dediev.springCloudSecurity.rest;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +25,11 @@ import java.util.Objects;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/filestorage")
-@Tag(name = "File uploading service", description = "the fileuploading swagger api")
+@Api(
+        value = "API to upload files to the server",
+        description = "Этот контроллер позволяет загружать фотографии на локальное хранилище",
+        produces = "application/json"
+)
 public class FileRestControllerV1 {
 
     @Value(value = "${file.storage}")
@@ -31,10 +38,13 @@ public class FileRestControllerV1 {
     private final FileServiceImpl service;
 
     @PostMapping("/uploadfile")
-    public ResponseEntity saveFile(MultipartFile multipartFile) {
+    @ApiOperation(
+            value = "Save file to the storage"
+    )
+    public ResponseEntity saveFile(@ApiParam("MultipartFile") MultipartFile multipartFile) {
         FileEntity file = new FileEntity();
         final String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-        Path path = Paths.get( filePath + fileName);
+        Path path = Paths.get(filePath + fileName);
         try {
             Files.copy(multipartFile.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {

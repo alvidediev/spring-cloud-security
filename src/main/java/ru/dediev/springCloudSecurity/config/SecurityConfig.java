@@ -26,6 +26,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtConfigurer = jwtConfigurer;
     }
 
+    private static final String[] SWAGGER_WHITELIST = {
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/v2/api-docs",
+            "/webjars/**"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -34,8 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/api/v2/api-docs").permitAll()
-                .antMatchers("/api/swagger-ui/**").permitAll()
+                .antMatchers(SWAGGER_WHITELIST).permitAll()
                 .antMatchers("/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/api/v1/auth/login").permitAll()
                 .antMatchers("/api/v1/filestorage/**").permitAll()
@@ -59,4 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
+
+
 }
