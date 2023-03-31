@@ -1,4 +1,11 @@
 spring:
+  liquibase:
+
+    change-log: 'classpath:db/migration/master.xml'
+    default-schema: 'proselyte'
+    user: 'proselyte'
+    password: 'proselyte'
+    url: jdbc:mysql://localhost:3306/proselyte
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: proselyte
@@ -11,15 +18,17 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
   jpa:
+
     database: mysql
     hibernate:
       ddl-auto: none
     show-sql: true
 file:
-  storage: 'src/main/resources/storage'
+  storage: 'src/main/resources/storage/'
 
 jwt:
   header: Authorization
   secret: proselyte
   expiration: 604800
-
+server:
+  port: 8888

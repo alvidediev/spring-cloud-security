@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.dediev.springCloudSecurity.model.entity.Permission;
+import ru.dediev.springCloudSecurity.model.entity.Role;
 import ru.dediev.springCloudSecurity.security.JwtConfigurer;
 
 @Configuration
@@ -32,8 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/api/v1/auth/login").permitAll()
                 .antMatchers("/api/v1/filestorage/**").permitAll()
+                .antMatchers("/api/v1/users/delete/**").hasAuthority(Permission.DEVELOPERS_WRITE.getPermission())
+                .antMatchers("/api/v1/users/get/**").hasAuthority(Permission.DEVELOPERS_WRITE.getPermission())
+                .antMatchers("/api/v1/users/getall/").hasAuthority(Permission.DEVELOPERS_READ.getPermission())
+                .antMatchers("/api/v1/users/register/").hasAuthority(Permission.DEVELOPERS_READ.getPermission())
                 .anyRequest()
                 .authenticated()
                 .and()

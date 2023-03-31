@@ -6,8 +6,8 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "files")
-public class File {
+@Table(name = "file")
+public class FileEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +20,8 @@ public class File {
     @Column(name = "file_path")
     private String path;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "file", cascade = CascadeType.ALL)
-    private transient Event event;
+    @OneToOne(mappedBy = "file", cascade = CascadeType.ALL)
+    private EventEntity event;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")

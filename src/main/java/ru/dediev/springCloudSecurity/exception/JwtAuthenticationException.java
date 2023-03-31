@@ -1,4 +1,4 @@
-package ru.dediev.springCloudSecurity.security;
+package ru.dediev.springCloudSecurity.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
