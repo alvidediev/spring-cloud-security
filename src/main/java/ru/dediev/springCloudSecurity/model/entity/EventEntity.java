@@ -6,19 +6,21 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "events")
-public class Event {
+@Table(name = "event")
+public class EventEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @ManyToOne(  cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id")
-    private User user;
-    @OneToOne( cascade = CascadeType.ALL)
+    private UserEntity user;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_file_id")
-    private File file;
+    private FileEntity file;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")

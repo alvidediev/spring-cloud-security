@@ -1,15 +1,14 @@
 package ru.dediev.springCloudSecurity.model.entity;
 
 import lombok.Data;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "user")
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +24,11 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
     @ManyToMany
-    private List<Event> events;
+    private List<EventEntity> events;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
