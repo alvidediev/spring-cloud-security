@@ -1,5 +1,5 @@
 
-CREATE TABLE IF NOT EXISTS `proselyte.file`
+CREATE TABLE IF NOT EXISTS `file`
 (
     id        INT         NOT NULL AUTO_INCREMENT,
     file_name VARCHAR(20) NOT NULL,

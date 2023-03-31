@@ -11,7 +11,7 @@ public class FileEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "file_id")
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "file_name")

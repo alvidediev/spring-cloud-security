@@ -1,5 +1,5 @@
 
-CREATE TABLE IF NOT EXISTS `proselyte.user`
+CREATE TABLE IF NOT EXISTS `user`
 (
     id         INT                NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(20)        NOT NULL,
