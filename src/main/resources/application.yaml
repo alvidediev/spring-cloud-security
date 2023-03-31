@@ -1,6 +1,5 @@
 spring:
   liquibase:
-
     change-log: 'classpath:db/migration/master.xml'
     default-schema: 'proselyte'
     user: 'proselyte'
@@ -18,11 +17,11 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
   jpa:
-
     database: mysql
     hibernate:
       ddl-auto: none
     show-sql: true
+
 file:
   storage: 'src/main/resources/storage/'
 

@@ -17,9 +17,17 @@
 		<java.version>11</java.version>
 		<mysql.connector.version>8.0.21</mysql.connector.version>
 		<jjwt.version>0.9.1</jjwt.version>
+		<openapi.version>1.4.3</openapi.version>
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+		<groupId>io.springfox</groupId>
+		<artifactId>springfox-boot-starter</artifactId>
+		<version>3.0.0</version>
+	</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>

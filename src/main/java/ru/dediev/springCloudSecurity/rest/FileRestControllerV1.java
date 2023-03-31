@@ -1,5 +1,6 @@
 package ru.dediev.springCloudSecurity.rest;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +22,12 @@ import java.util.Objects;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/filestorage")
+@Tag(name = "File uploading service", description = "the fileuploading swagger api")
 public class FileRestControllerV1 {
+
     @Value(value = "${file.storage}")
     private String filePath;
+
     private final FileServiceImpl service;
 
     @PostMapping("/uploadfile")
