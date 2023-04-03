@@ -1,5 +1,8 @@
 package ru.dediev.springCloudSecurity.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,9 +22,6 @@ public class FileEntity {
 
     @Column(name = "file_path")
     private String path;
-
-    @OneToOne(mappedBy = "file", cascade = CascadeType.ALL)
-    private EventEntity event;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")

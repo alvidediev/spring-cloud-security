@@ -1,5 +1,6 @@
 package ru.dediev.springCloudSecurity.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,11 +15,16 @@ public class EventEntity {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(  cascade = CascadeType.ALL)
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(name = "fk_user_id")
+    @JsonIgnore
+
     private UserEntity user;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_file_id")
     private FileEntity file;
 

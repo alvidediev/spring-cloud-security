@@ -19,29 +19,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity save(UserEntity user) {
-        user.setRole(Role.USER);
-        user.setStatus(Status.ACTIVE);
         return repository.save(user);
     }
 
     @Override
     public Optional<UserEntity> getById(Long id) {
-        return repository.findById(id);
+        return Optional.of(repository.findById(id).get());
     }
 
     @Override
     public List<UserEntity> getAll() {
         return repository.findAll();
-    }
-
-    @Override
-    public UserEntity update(UserEntity user, Long aLong) {
-        final Optional<UserEntity> byId = repository.findById(aLong);
-        if (byId.isPresent()) {
-            final UserEntity userEntity = byId.get();
-            userEntity.setRole(user.getRole());
-            return repository.save(userEntity);
-        } else return null;
     }
 
     @Override
@@ -52,5 +40,10 @@ public class UserServiceImpl implements UserService {
             userEntity.setStatus(Status.DELETED);
             repository.save(userEntity);
         }
+    }
+
+    @Override
+    public Optional<UserEntity> getByFirstnameAndLastname(String firstname, String lastname) {
+        return repository.findByFirstNameAndLastName(firstname, lastname);
     }
 }

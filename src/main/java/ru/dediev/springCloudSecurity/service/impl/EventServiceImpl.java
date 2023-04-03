@@ -35,24 +35,12 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Optional<EventEntity> getById(Long id) {
-        return repository.findById(id);
+        return Optional.of(repository.findById(id).get());
     }
 
     @Override
     public List<EventEntity> getAll() {
         return repository.findAll();
-    }
-
-    @Override
-    public EventEntity update(EventEntity event, Long aLong) {
-        final Optional<EventEntity> byId = repository.findById(aLong);
-        if (byId.isPresent()){
-            final EventEntity eventEntity = byId.get();
-            eventEntity.setFile(event.getFile());
-            eventEntity.setUser(event.getUser());
-            return repository.save(eventEntity);
-        }
-        return null;
     }
 
     @Override

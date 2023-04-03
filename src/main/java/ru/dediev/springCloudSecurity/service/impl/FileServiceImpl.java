@@ -22,24 +22,12 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public Optional<FileEntity> getById(Long id) {
-        return repository.findById(id);
+        return Optional.of(repository.findById(id).get());
     }
 
     @Override
     public List<FileEntity> getAll() {
         return repository.findAll();
-    }
-
-    @Override
-    public FileEntity update(FileEntity file, Long id) {
-        final Optional<FileEntity> byId = repository.findById(id);
-        if (byId.isPresent()) {
-            FileEntity fileEntity = byId.get();
-            fileEntity.setId(file.getId());
-            fileEntity.setName(file.getName());
-            fileEntity.setName(fileEntity.getName());
-            return repository.save(fileEntity);
-        } else return null;
     }
 
     @Override
