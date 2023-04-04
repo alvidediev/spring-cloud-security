@@ -9,6 +9,5 @@ public interface GenericService<T, ID> {
     T save(T t);
     Optional<T> getById(ID id) throws UserNotFoundInBaseException;
     List<T> getAll();
-    T update(T t, ID id);
     void deleteById(ID id) throws UserNotFoundInBaseException;
 }

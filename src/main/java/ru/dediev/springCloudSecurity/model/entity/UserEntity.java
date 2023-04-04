@@ -1,6 +1,10 @@
 package ru.dediev.springCloudSecurity.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,7 +31,11 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     private List<EventEntity> events;
 
     @Enumerated(value = EnumType.STRING)

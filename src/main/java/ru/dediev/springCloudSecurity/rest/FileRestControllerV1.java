@@ -1,9 +1,7 @@
 package ru.dediev.springCloudSecurity.rest;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.annotations.*;
+import liquibase.pro.packaged.A;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ru.dediev.springCloudSecurity.model.entity.FileEntity;
+import ru.dediev.springCloudSecurity.model.entity.Status;
 import ru.dediev.springCloudSecurity.service.impl.FileServiceImpl;
 
 import java.io.IOException;
@@ -24,7 +23,7 @@ import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/filestorage")
+@RequestMapping("/api/v1/files")
 @Api(
         value = "API to upload files to the server",
         description = "Этот контроллер позволяет загружать фотографии на локальное хранилище",
@@ -37,9 +36,9 @@ public class FileRestControllerV1 {
 
     private final FileServiceImpl service;
 
-    @PostMapping("/uploadfile")
+    @PostMapping("/")
     @ApiOperation(
-            value = "Save file to the storage"
+            value = "Save file to the storage and response HTTP Status.OK"
     )
     public ResponseEntity saveFile(@ApiParam("MultipartFile") MultipartFile multipartFile) {
         FileEntity file = new FileEntity();
@@ -53,6 +52,7 @@ public class FileRestControllerV1 {
 
         file.setName(fileName);
         file.setPath(String.valueOf(path));
+        file.setStatus(Status.ACTIVE);
         service.save(file);
         return ResponseEntity.ok("File: " + fileName + " successfully uploaded");
     }
