@@ -1,7 +1,8 @@
 package ru.dediev.springCloudSecurity.rest;
 
-import io.swagger.annotations.*;
-import liquibase.pro.packaged.A;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -36,11 +37,13 @@ public class FileRestControllerV1 {
 
     private final FileServiceImpl service;
 
-    @PostMapping("/")
+    @PostMapping
     @ApiOperation(
             value = "Save file to the storage and response HTTP Status.OK"
     )
-    public ResponseEntity saveFile(@ApiParam("MultipartFile") MultipartFile multipartFile) {
+    public ResponseEntity save(
+            @ApiParam("MultipartFile") MultipartFile multipartFile
+    ) {
         FileEntity file = new FileEntity();
         final String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
         Path path = Paths.get(filePath + fileName);
